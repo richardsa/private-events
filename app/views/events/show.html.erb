@@ -1,0 +1,14 @@
+<% provide(:title, @event.description) %>
+<div class="row">
+ 
+  
+  <div class="col-md-12">
+    
+    
+          <p><%= @event.location %></p>
+          <p><%= @event.description %></p>
+          <p><%= @event.date %></p>
+          <p>Created by: <%= link_to  @user.username, @user  %></p>
+  </div>
+  
+</div>

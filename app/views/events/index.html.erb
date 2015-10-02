@@ -1,0 +1,17 @@
+<% provide(:title, 'All Events') %>  
+<div class="col-md-12">
+<h1>All Events</h1>
+<% @events.each do |event| %>
+        <p>
+          <p><%= link_to  event.location, event %></p>
+          <p><%= event.description %></p>
+          <p><%= event.date %></p>
+        </p>
+        <hr />
+<% end %>
+
+<% if logged_in? %>
+ <%= link_to "Create an Event", new_event_path %>
+
+<% end %>
+</div>

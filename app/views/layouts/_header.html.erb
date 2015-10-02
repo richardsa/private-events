@@ -3,9 +3,9 @@
      <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home", root_path %></li>
-        
+        <li><%= link_to "All Events", events_path %></li>
         <% if logged_in? %>
-          Hello <%= @user.username %>
+          <li><%= link_to "Create Event", new_event_path %></li>
           <li><%= link_to "Log out", logout_path, method: "delete" %></li>
             </ul>
           </li>
@@ -16,3 +16,5 @@
     </nav>
   </div>
 </header>
+
+
