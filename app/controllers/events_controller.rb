@@ -15,6 +15,7 @@ before_action :logged_in_user, only: [:new, :create]
     @event = Event.find(params[:id])
     @creator = @event.creator
     @attendees = @event.attendees.all
+    
   end
   
   def create

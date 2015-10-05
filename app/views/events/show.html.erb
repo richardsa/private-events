@@ -3,12 +3,31 @@
  
   
   <div class="col-md-12">
-    
-    
+     <div class="col-md-6 col-md-offset-3">
+ <%= form_for(current_user.invites.build(attended_event_id: @event.id)) do |f| %>
+		  <%= f.hidden_field :attended_event_id, :value => @event.id %>
+			<%= f.submit "Attend Event", class: "btn btn-success" %>
+	<% end %>
+     
           <p><%= @event.location %></p>
           <p><%= @event.description %></p>
           <p><%= @event.date %></p>
           <p>Created by: <%= link_to  @creator.username, @creator  %></p>
+          
+  <% if @event.attendees.any? %>
+      <div class="posts">
+      <h1>Attendees</h1>
+        
+      <% @event.attendees.each do |attendee| %>
+        <p>
+          <p><%= link_to  attendee.username, attendee %></p>
+          
+        </p>
+        <hr />
+      <% end %>
+    <% else %>
+        TNo one is coming - will you be the first?
+     <% end %>
   </div>
   
 </div>
