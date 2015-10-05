@@ -13,7 +13,8 @@ before_action :logged_in_user, only: [:new, :create]
   
   def show
     @event = Event.find(params[:id])
-    @user = current_user
+    @creator = @event.creator
+    @attendees = @event.attendees.all
   end
   
   def create
