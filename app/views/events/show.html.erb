@@ -1,18 +1,23 @@
 <% provide(:title, @event.description) %>
 <div class="row">
- 
-  
-  <div class="col-md-12">
-     <div class="col-md-6 col-md-offset-3">
- <%= form_for(current_user.invites.build(attended_event_id: @event.id)) do |f| %>
-		  <%= f.hidden_field :attended_event_id, :value => @event.id %>
-			<%= f.submit "Attend Event", class: "btn btn-success" %>
-	<% end %>
-     
-          <p><%= @event.location %></p>
-          <p><%= @event.description %></p>
-          <p><%= @event.date %></p>
-          <p>Created by: <%= link_to  @creator.username, @creator  %></p>
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Event Details</h1>
+    <p><strong>Location:</strong> <%= @event.location %></p>
+    <p><strong>Description:</strong> <%= @event.description %></p>
+    <p><strong>Date:</strong> <%= @event.date %></p>
+    <p><strong>Created by:</strong> <%= link_to  @creator.username, @creator  %></p>
+    <% if logged_in? %>
+      <% if @event.attendees.include?(current_user) %>
+          <%= form_for(current_user.invites.find_by(attended_event_id: @event.id), :html => { :method => :delete }) do |f| %>
+            <%= f.submit "Leave Event", class: "btn btn-danger" %>
+          <% end %>
+      <% else %> 
+        <%= form_for(current_user.invites.build(attended_event_id: @event.id)) do |f| %>
+            <%= f.hidden_field :attended_event_id, :value => @event.id %>
+            <%= f.submit "Attend Event", class: "btn btn-success" %>
+        <% end %>
+      <% end %>
+    <% end %>
           
   <% if @event.attendees.any? %>
       <div class="posts">
@@ -26,7 +31,7 @@
         <hr />
       <% end %>
     <% else %>
-        TNo one is coming - will you be the first?
+        No one is coming - will you be the first?
      <% end %>
   </div>
   

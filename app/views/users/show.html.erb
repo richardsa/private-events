@@ -6,10 +6,10 @@
     <h1> <%= @user.username %></h1>
     <h2> <%= @user.email %></h2>
     <hr />
+    <div class="events">
     <% if @user.events.any? %>
-      <div class="posts">
-      <h1>Events</h1>
-        
+     
+      <h1>My Events</h1>
       <% @user.events.each do |event| %>
         <p>
           <p><%= link_to  event.location, event %></p>
@@ -21,6 +21,19 @@
     <% else %>
         <h3><%= @user.username %> does not have any events</h3>
      <% end %>
+     <% if @user.invites.any? %>
+       <h1>Events I'm Attending</h1>
+       <% @user.invites.each do |invite| %>
+          <p>
+            <p><%= link_to  invite.attended_event.location, invite.attended_event %></p>
+            <p><%= invite.attended_event.date %></p>
+            <p><%= invite.attended_event.description%></p>
+          </p>
+          <hr />
+        <% end %>
+      <% else %>
+          <h3><%= @user.username %> does not have any events</h3>
+    <% end %>
   </div>
   
 </div>
