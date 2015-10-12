@@ -1,14 +1,30 @@
 <% provide(:title, 'All Events') %>  
 <div class="col-md-12">
-<h1>All Events</h1>
-<% @events.each do |event| %>
-        <p>
-          <p><%= link_to  event.location, event %></p>
-          <p><%= event.description %></p>
-          <p><%= event.date %></p>
-        </p>
-        <hr />
-<% end %>
+ 
+       <% if  @upcoming_events.any? %>
+         <h1>Upcoming Events</h1>
+         <% @upcoming_events.each do |invite| %>
+            <p>
+          <p><%= link_to  invite.location, invite %></p>
+              <p><%= invite.date.strftime("%B %d, %Y") %></p>
+              <p><%= invite.description%></p>
+            </p>
+            <hr />
+          <% end %>
+        <% end %>
+
+<% if  @prev_events.any? %>
+       <h1>Past Events</h1>
+       <% @prev_events.each do |invite| %>
+          <p>
+            
+             <p><%= link_to  invite.location, invite %></p>
+               <p><%= invite.date.strftime("%B %d, %Y") %></p>
+              <p><%= invite.description%></p>
+          </p>
+          <hr />
+        <% end %>
+      <% end %> 
 
 <% if logged_in? %>
  <%= link_to "Create an Event", new_event_path %>

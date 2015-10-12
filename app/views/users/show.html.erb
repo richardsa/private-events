@@ -9,30 +9,46 @@
     <div class="events">
     <% if @user.events.any? %>
      
-      <h1>My Events</h1>
+      <h1>Created Events </h1>
       <% @user.events.each do |event| %>
         <p>
           <p><%= link_to  event.location, event %></p>
-          <p><%= event.date %></p>
+          <p><%= event.date.strftime("%B %d, %Y") %></p>
           <p><%= event.description%></p>
         </p>
         <hr />
       <% end %>
     <% else %>
-        <h3><%= @user.username %> does not have any events</h3>
+        <h3><%= @user.username %> has not created any events</h3>
      <% end %>
-     <% if @user.invites.any? %>
-       <h1>Events I'm Attending</h1>
-       <% @user.invites.each do |invite| %>
+     
+     
+    <% if @user.invites.any?  %>
+       <% if  @upcoming_events.any? %>
+         <h1>Upcoming Events</h1>
+         <% @upcoming_events.each do |invite| %>
+            <p>
+          <p><%= link_to  invite.location, invite %></p>
+              <p><%= invite.date.strftime("%B %d, %Y") %></p>
+              <p><%= invite.description%></p>
+            </p>
+            <hr />
+          <% end %>
+        <% end %>
+       <% if  @prev_events.any? %>
+       <h1>Past Events</h1>
+       <% @prev_events.each do |invite| %>
           <p>
-            <p><%= link_to  invite.attended_event.location, invite.attended_event %></p>
-            <p><%= invite.attended_event.date %></p>
-            <p><%= invite.attended_event.description%></p>
+            
+             <p><%= link_to  invite.location, invite %></p>
+               <p><%= invite.date.strftime("%B %d, %Y") %></p>
+              <p><%= invite.description%></p>
           </p>
           <hr />
         <% end %>
-      <% else %>
-          <h3><%= @user.username %> does not have any events</h3>
+      <% end %> 
+    <% else %>
+          <h3><%= @user.username %> is not attending any events</h3>
     <% end %>
   </div>
   

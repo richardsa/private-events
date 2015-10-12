@@ -3,12 +3,12 @@ before_action :logged_in_user, only: [:new, :create]
   def new
   
     @event = current_user.events.build
-  
-    #@event = Event.new
   end
   
   def index
-    @events = Event.all
+     @events = Event.all
+     @upcoming_events = Event.upcoming
+     @prev_events = Event.past
   end
   
   def show

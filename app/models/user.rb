@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   has_many :attended_events, :through => :invites
   attr_accessor :remember_token
   
+ 
+  
   
  # Returns a random token.
   def User.new_remember_token

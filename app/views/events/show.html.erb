@@ -4,7 +4,7 @@
     <h1>Event Details</h1>
     <p><strong>Location:</strong> <%= @event.location %></p>
     <p><strong>Description:</strong> <%= @event.description %></p>
-    <p><strong>Date:</strong> <%= @event.date %></p>
+    <p><strong>Date:</strong> <%= @event.date.strftime("%B %d, %Y") %></p>
     <p><strong>Created by:</strong> <%= link_to  @creator.username, @creator  %></p>
     <% if logged_in? %>
       <% if @event.attendees.include?(current_user) %>

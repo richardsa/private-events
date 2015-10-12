@@ -14,7 +14,8 @@
       </p>
       <p>
       <%= f.label :date %>
-      <%= f.date_field :date, class: 'form-control' %>
+    
+      <%= f.date_select :date, :order => [:month, :day, :year] %>
       </p>
       <p>
       <%= f.submit "Post", class: "btn btn-primary" %>
